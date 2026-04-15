@@ -2,6 +2,7 @@ from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from app.services.face_service import get_embedding
 from app.db import get_connection
 from app.faiss_index import rebuild_faiss_from_db
+from app.config import ADMIN_USER, ADMIN_PASSWORD
 from deepface.modules.exceptions import FaceNotDetected
 import logging
 from pydantic import BaseModel
@@ -90,7 +91,7 @@ class LoginRequest(BaseModel):
 @router.post("/login")
 def login(data: LoginRequest):
     # Admin shortcut — replace with proper hashed credential check in production
-    if data.email == "admin" and data.password == "admin@123":
+    if data.email == ADMIN_USER and data.password == ADMIN_PASSWORD:
         return {
             "role": "admin",
             "user_id": 0,

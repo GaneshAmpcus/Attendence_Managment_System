@@ -6,3 +6,4 @@ numpy
 faiss-cpu
 psycopg[binary]
 python-multipart
+python-dotenv
